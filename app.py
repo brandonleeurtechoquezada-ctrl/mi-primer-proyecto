@@ -8,9 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
-### ctrl + shift + o
-
-@app.route('/') ### Esta es la ruta de visualización de todos los contactos
+@app.route('/')
 def inicio():
     ### Se guarda en una variable contactos
     ### De la tabla contactos, consulta a todos los contactos y los guarda en esa variable
