@@ -27,16 +27,18 @@
                 </tr>
             </thead>
             <tbody>
+                {% for contacto in contactos %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Urtecho</td>
-                    <td>940088608</td>
-                    <td>brandon.urtecho@gmail.com</td>
+                    <th scope="row">{{ contacto.id }}</th>
+                    <td>{{ contacto.nombre }}</td>
+                    <td>{{ contacto.telefono }}</td>
+                    <td>{{ contacto.email }}</td>
                     <td class="text-center">
                         <a href="{{ url_for('editar') }}" class="btn btn-warning">Editar</a>
                         <button type="button" class="btn btn-danger">Eliminar</button>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         

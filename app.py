@@ -12,7 +12,10 @@ db.init_app(app)
 
 @app.route('/')
 def inicio():
-    return render_template('index.html')
+    ### Se guarda en una variable contactos
+    ### De la tabla contactos, consulta a todos los contactos y los guarda en esa variable
+    contactos = Contacto.query.all()   #### SELECT * FROM Contacto
+    return render_template('index.html', contactos = contactos)
 
 
 @app.route('/crear')
@@ -29,8 +32,13 @@ def editar():
 
 #### Data de prueba
 
+## Aquí se van a cargar todos los datos iniciales al ejecutar el programa
 def cargar_datos_iniciales():
-    ## Aquí se van a cargar todos los datos iniciales al ejecutar el programa
+    ### Si mi tabla Contactos tiene datos, entonces no ejecuta nada 
+    if Contacto.query.count() > 0:
+        ### Retorna vacío cuando hay contenido en la tabla
+        return
+
     contactos = [
         Contacto(nombre='Ana Garcia', telefono='938283232', email='ana@email.com'),
         Contacto(nombre='Carlos Lopez', telefono='912345678', email='carlos@email.com'),
