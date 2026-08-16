@@ -16,20 +16,23 @@
         <div class="card">
             <div class="card-header fw-bold">Modifica los datos del contacto</div>
             <div class="card-body">
-                <form>
+                <form action="{{ url_for('actualizar', id=contacto.id) }}" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" value="Ana Garcia">
+                        <input type="text" name="nombre" class="form-control" id="nombre"
+                            value="{{ contacto.nombre }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" value="987654321">
+                        <input type="tel" name="telefono" class="form-control" id="telefono"
+                            value="{{ contacto.telefono }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" value="ana@email.com">
+                        <input type="email" name="email" class="form-control" id="email"
+                            value="{{ contacto.email }}" required>
                     </div>
-                    <button type="button" class="btn btn-warning">Actualizar contacto</button>
+                    <button type="submit" class="btn btn-warning">Actualizar contacto</button>
                     <a href="{{ url_for('inicio') }}" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>

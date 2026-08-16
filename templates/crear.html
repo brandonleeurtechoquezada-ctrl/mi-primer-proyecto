@@ -19,15 +19,15 @@
                 <form action="/crear" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej: Juan Perez">
+                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej: Juan Perez" required>
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ej: 95987654">
+                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ej: 95987654" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Ej: juan.perez@gmail.com">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Ej: juan.perez@gmail.com" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar contacto</button>
                     <a href="{{ url_for('inicio') }}" class="btn btn-secondary">Cancelar</a>

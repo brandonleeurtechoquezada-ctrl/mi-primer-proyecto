@@ -18,6 +18,8 @@ def inicio():
     return render_template('index.html', contactos = contactos)
 
 
+###############  CREACION DE UN FORMULARIO ###################
+
 ### Paso 1: Visualizar el formulario de la creación del contacto
 @app.route('/crear', methods = ['GET']) ### Este es un método de tipo de GET
 def ver_creacion_contacto():
@@ -31,7 +33,7 @@ def ver_creacion_contacto():
 ### Esto se va a ejecutar cuando de click en el botón "Crear contacto"
 @app.route('/crear', methods = ['POST'])  ### Este es un método de tipo POST
 def crear(): ### request = petición
-    ### parte 1: Formar el objeto
+    ### parte 1: Formar nuevo el objeto
     nuevo_contacto = Contacto(
         nombre = request.form['nombre'],
         telefono = request.form['telefono'],
@@ -43,9 +45,48 @@ def crear(): ### request = petición
     return redirect(url_for("inicio")) ### Aquí le estoy pidiendo que me redirija al listado de contactos, que es el inicio
 
 
-@app.route('/editar')
-def editar():
-    return render_template('editar.html')
+############### ACTUALIZACION DE UN FORMULARIO #####################
+
+### Paso 1: Visualizar el formulario de la edición del contacto
+@app.route('/editar/<int:id>', methods=['GET'])
+def editar(id):
+    contacto = Contacto.query.get_or_404(id)   ### Dame el contacto con el identificador X (ej: 2)
+    ### devuelveme un contacto o si no lo encuentras dame un error 404
+    ### 404: código de error -> Significa "Not found" o "No encontrado"
+    return render_template('editar.html', contacto=contacto)
+
+### Paso 2: Enviar el formulario
+@app.route('/editar/<int:id>', methods=['POST'])
+def actualizar(id):
+    ### Parte 1: Obtengo primero el contacto guardado en la base de datos
+    contacto = Contacto.query.get_or_404(id) 
+    ### Parte 2: Actualizo cada uno de los datos del contacto obtenido de la parte 1, campo por campo
+    ### Obteniendo cada campo usando el objeto "request"
+    contacto.nombre = request.form['nombre']
+    contacto.telefono = request.form['telefono']
+    contacto.email = request.form['email']
+    ### Parte 3: Guardamos el cambio en la base de datos
+    db.session.commit()
+    return redirect(url_for('inicio'))
+
+
+
+@app.route('/eliminar/<int:id>', methods=['POST'])
+def eliminar(id):
+    ### Parte 1: Obtengo primero el contacto guardado en la base de datos
+    contacto = Contacto.query.get_or_404(id)
+    ### Parte 2: Elimino el contacto
+    db.session.delete(contacto)
+    ### Parte 3: Guardo los cambios en la base de datos
+    db.session.commit()
+    return redirect(url_for('inicio'))
+
+
+
+
+
+
+
 
 
 

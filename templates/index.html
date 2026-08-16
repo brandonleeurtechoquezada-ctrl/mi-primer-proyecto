@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -34,8 +34,11 @@
                     <td>{{ contacto.telefono }}</td>
                     <td>{{ contacto.email }}</td>
                     <td class="text-center">
-                        <a href="{{ url_for('editar') }}" class="btn btn-warning">Editar</a>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <a href="{{ url_for('editar', id=contacto.id) }}" class="btn btn-warning">Editar</a>
+                        <form action="{{ url_for('eliminar', id=contacto.id) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('¿Eliminar este contacto?');">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
